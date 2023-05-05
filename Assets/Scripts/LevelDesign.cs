@@ -68,9 +68,37 @@ public class LevelDesign : MonoBehaviour
 
     public void ActiveWin()
     {
+        if (listCat == null)
+        {
+            Debug.LogError("list cat null");
+            return;
+        }
         foreach (CatController cat in listCat)
         {
+            if (cat == null)
+            {
+                Debug.LogError("cat null");
+                continue;
+            }
             cat.RunAnimWin();
+        }
+    }
+    
+    public void ActiveLose()
+    {
+        if (listCat == null)
+        {
+            Debug.LogError("list cat null");
+            return;
+        }
+        foreach (CatController cat in listCat)
+        {
+            if (cat == null)
+            {
+                Debug.LogError("cat null");
+                continue;
+            }
+            cat.RunAnimLose();
         }
     }
 }

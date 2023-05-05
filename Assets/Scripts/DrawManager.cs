@@ -39,7 +39,7 @@ public class DrawManager : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 canDraw = true;
-                GameController.Instance.levelDesign.UnActiveHint();
+                GameController.Instance.GetLevelDesign().UnActiveHint();
                 _CurrentLine = Instantiate(_LinePrefabs, mousePos, Quaternion.identity);
                 
             }

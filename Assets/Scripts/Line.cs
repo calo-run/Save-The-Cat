@@ -63,7 +63,7 @@ public class Line : MonoBehaviour
             _Render.positionCount++;
             _Render.SetPosition(_Render.positionCount - 1, _point[_point.Count - 1]);
             _Colider.points = _point.ToArray();
-            int maxPoint = GameController.Instance.levelDesign.maxPointLineCanDraw;
+            int maxPoint = GameController.Instance.GetLevelDesign().maxPointLineCanDraw;
             float rate = (float)(maxPoint - chieuDai*10) / maxPoint;
             GameController.Instance.ChangeProcessDraw(rate);
             if(rate <= 0.05f) DrawManager.Instance.EndDraw();

@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
     float TimeToWin = 10f;
     public TMPro.TMP_Text time_txt;
 
-    public LevelDesign levelDesign;
+    private LevelDesign levelDesign;
     public GameObject buyNoAds;
 
     public GameObject panelNoInternet;
@@ -67,6 +67,15 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    public LevelDesign GetLevelDesign()
+    {
+        if (levelDesign == null)
+        {
+            levelDesign = FindObjectOfType<LevelDesign>();
+        }
+        return levelDesign;
     }
     // Start is called before the first frame update
     void Start()
@@ -135,7 +144,7 @@ public class GameController : MonoBehaviour
 
     public void PlayGameAfterDraw(){
         PlayGame = true;
-        levelDesign.UnActiveHint();
+        GetLevelDesign().UnActiveHint();
         btn_hint.gameObject.SetActive(false);
         CountTimeOut(12);
     }
@@ -204,7 +213,7 @@ public class GameController : MonoBehaviour
         GameObject obj = Resources.Load<GameObject>("Level/"+DataGame.Instance.lvl_current);
         GameObject lvl = Instantiate(obj, gameHolder);
         levelDesign = lvl.GetComponent<LevelDesign>();
-        panel_Game.maxPointLineCanDraw = levelDesign.maxPointLineCanDraw;
+        panel_Game.maxPointLineCanDraw = GetLevelDesign().maxPointLineCanDraw;
         ChangeProcessDraw(1f);
         
     }
@@ -332,7 +341,7 @@ public class GameController : MonoBehaviour
         b_EndGame = true;
         countPlay++;
         SoundManager.Instance.StopSoundBee();
-        levelDesign.ActiveWin();
+        GetLevelDesign().ActiveWin();
         particleWin.Play();
         StartCoroutine(WaitShowWin());
     }
@@ -359,10 +368,7 @@ public class GameController : MonoBehaviour
     public void Lose()
     {
         PlayGame = false;
-        foreach (CatController cat in levelDesign.listCat)
-        {
-            cat.RunAnimLose();
-        }
+        GetLevelDesign().ActiveLose();
         StopAllCoroutines();
         StartCoroutine(WaitShowLose());
     }

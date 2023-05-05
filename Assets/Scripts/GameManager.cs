@@ -47,7 +47,7 @@ public class GameManager : ManualSingleton<GameManager>
         }
         else if (typeAds == TypeAds.Suggestion)
         {
-            GameController.Instance.levelDesign.ActiveHint();
+            GameController.Instance.GetLevelDesign().ActiveHint();
         }
     }
 }
