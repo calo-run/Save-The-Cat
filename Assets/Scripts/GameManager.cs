@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TrackingFirebase;
@@ -9,8 +10,15 @@ public class GameManager : ManualSingleton<GameManager>
 
     public void ShowOpenAds()
     {
-        Admob.Instance.ShowAdIfReady();
-        FirebaseUtils.Instance.OpenApp();
+        try
+        {
+            Admob.Instance.ShowAdIfReady();
+            FirebaseUtils.Instance.OpenApp();
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning(e);
+        }
     }
     public void ShowAdsAddCoinWin()
     {

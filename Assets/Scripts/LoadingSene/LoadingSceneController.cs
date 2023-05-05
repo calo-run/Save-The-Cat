@@ -27,6 +27,7 @@ public class LoadingSceneController : MonoBehaviour
         TimeCount += Time.deltaTime*100/Loadingtime;
         if (TimeCount >= 100)
         {
+            TimeCount = 0;
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
                 GameController.Instance.OpenPanelNoInternet();
@@ -40,14 +41,10 @@ public class LoadingSceneController : MonoBehaviour
                 GameController.Instance.TurnOffMusic();
             }
             this.gameObject.SetActive(false);
-            TimeCount = 0;
+            GameManager.Instance.ShowOpenAds();
         }
     }
-
-    private void OnDisable()
-    {
-        GameManager.Instance.ShowOpenAds();
-    }
+    
 
     public void SetBarValue(float Percent)
     {
