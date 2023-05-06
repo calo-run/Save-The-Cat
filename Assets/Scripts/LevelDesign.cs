@@ -11,6 +11,7 @@ public class LevelDesign : MonoBehaviour
     private AstarPath astarPath;
     private GameObject hintLine;
     public List<CatController> listCat = new List<CatController>();
+    
     private void Start()
     {
         hintLine = this.gameObject.transform.Find("HintLine").gameObject;
@@ -33,9 +34,12 @@ public class LevelDesign : MonoBehaviour
         }
 
         listCat.Clear();
-        foreach (CatController cat in FindObjectsOfType<CatController>())
+        foreach (Transform cat in transform)
         {
-            listCat.Add(cat);
+            if (cat.GetComponent<CatController>() != null)
+            {
+                listCat.Add(cat.GetComponent<CatController>());
+            }
         }
     }
     

@@ -110,8 +110,7 @@ public class GameController : MonoBehaviour
         btn_Ads_end.onClick.AddListener(WatchAdsToEarn);
         btn_hint.onClick.AddListener(ShowHind);
         panel_Levels.Load_lvl_item();
-        drawManager.enabled = false;
-        
+
         ChangeDiamondTxt(0);
     }
 
@@ -184,27 +183,16 @@ public class GameController : MonoBehaviour
     public void Reload_Game()
     {
         StopAllCoroutines();
-        drawManager.enabled = false;
-        PlayGame = false;
-        b_EndGame = false;
-        time_txt.gameObject.SetActive(false);
         if (gameHolder.childCount > 0)
         {
-            foreach (LevelDesign item in gameHolder.GetComponentsInChildren<LevelDesign>())
+            foreach (Transform item in gameHolder)
             {
                 Destroy(item.gameObject);
             }
-            StartCoroutine(createNewLvl());
         }
-        else
-        {
-            StartCoroutine(createNewLvl());
-        }
-        drawManager.enabled = true;
-        panel_EndGame.gameObject.SetActive(false);
-        DataGame.Instance.SaveLvlCurrent();
-        FirebaseUtils.Instance.Start_Lvl(DataGame.Instance.lvl_current);
+        StartCoroutine(createNewLvl());
     }
+
     IEnumerator createNewLvl()
     {
         yield return new WaitForEndOfFrame();
@@ -213,9 +201,19 @@ public class GameController : MonoBehaviour
         GameObject obj = Resources.Load<GameObject>("Level/"+DataGame.Instance.lvl_current);
         GameObject lvl = Instantiate(obj, gameHolder);
         levelDesign = lvl.GetComponent<LevelDesign>();
+        drawManager.ResetLine();
         panel_Game.maxPointLineCanDraw = GetLevelDesign().maxPointLineCanDraw;
         ChangeProcessDraw(1f);
+        panel_EndGame.gameObject.SetActive(false);
         
+        yield return new WaitForSecondsRealtime(0.5f);
+        PlayGame = false;
+        b_EndGame = false;
+        time_txt.gameObject.SetActive(false);
+        
+        drawManager.OnCanDraw();
+        DataGame.Instance.SaveLvlCurrent();
+        FirebaseUtils.Instance.Start_Lvl(DataGame.Instance.lvl_current);
     }
     public void OpenPanelSelectLevel()
     {
@@ -272,7 +270,6 @@ public class GameController : MonoBehaviour
         panel_Gift.SetActive(false);
         panel_Game.gameObject.SetActive(false);
         panel_EndGame.gameObject.SetActive(false);
-        drawManager.enabled = false;
         if (gameHolder.childCount > 0)
         {
             foreach (LevelDesign item in gameHolder.GetComponentsInChildren<LevelDesign>())

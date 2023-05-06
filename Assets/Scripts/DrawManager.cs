@@ -9,7 +9,7 @@ public class DrawManager : MonoBehaviour
     [SerializeField] Line _LinePrefabs;
     public const float Resolusion = 0.2f;
     private Line _CurrentLine;
-    private bool canDraw = true;
+    private bool canDraw;
 
 
     // Start is called before the first frame update
@@ -19,20 +19,9 @@ public class DrawManager : MonoBehaviour
         _Cam = Camera.main;
     }
 
-    // Update is called once per frame
-
-    private void OnDisable()
-    {
-        if (_CurrentLine != null)
-        {
-            ResetLine();
-        }
-    }
-
-
     void Update()
     {
-        if (!GameController.Instance.PlayGame && !GameController.Instance.b_EndGame)
+        if (canDraw && GameController.Instance.GetLevelDesign() != null)
         {
             Vector2 mousePos = _Cam.ScreenToWorldPoint(Input.mousePosition);
 
@@ -41,6 +30,7 @@ public class DrawManager : MonoBehaviour
                 canDraw = true;
                 GameController.Instance.GetLevelDesign().UnActiveHint();
                 _CurrentLine = Instantiate(_LinePrefabs, mousePos, Quaternion.identity);
+                _CurrentLine.transform.SetParent(GameController.Instance.GetLevelDesign().transform);
                 
             }
             if (Input.GetMouseButton(0) && _CurrentLine != null && canDraw)
@@ -68,7 +58,6 @@ public class DrawManager : MonoBehaviour
         canDraw = false;
         _CurrentLine.EndDraw();
         DropLine();
-       // GameController.Instance.PlayGameAfterDraw();
     }
 
     public void DropLine()
@@ -82,13 +71,11 @@ public class DrawManager : MonoBehaviour
     }
     public void ResetLine()
     {
-        foreach (Line item in FindObjectsOfType<Line>())
-        {
-            if (item != null)
-            {
-                Destroy(item.gameObject);
-            }
-        }
-        GameController.Instance.PlayGame = false;
+        _CurrentLine = null;
+    }
+
+    public void OnCanDraw()
+    {
+        canDraw = true;
     }
 }
