@@ -45,7 +45,7 @@ public class LevelDesign : MonoBehaviour
     
     IEnumerator UpdateScan()
     {
-        while (!GameController.Instance.b_EndGame)
+        while (!GameController.Instance.gameCompleted)
         {
             astarPath.Scan();
             yield return new WaitForSeconds(0.5f);

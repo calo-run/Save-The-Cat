@@ -15,7 +15,7 @@ public abstract class ObjectBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void LateUpdate()
     {
-        if (GameController.Instance.PlayGame == true)
+        if (GameController.Instance.ghostPlaying == true)
         {
             if (runMulti)
             {

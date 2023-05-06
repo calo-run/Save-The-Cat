@@ -40,7 +40,7 @@ public class GlassController : TerrainController
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (GameController.Instance.PlayGame)
+        if (GameController.Instance.ghostPlaying)
         {
             active = true;
         }
@@ -48,7 +48,7 @@ public class GlassController : TerrainController
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (GameController.Instance.PlayGame)
+        if (GameController.Instance.ghostPlaying)
         {
             active = true;
         }

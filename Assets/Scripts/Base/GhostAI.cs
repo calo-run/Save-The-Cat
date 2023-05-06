@@ -52,7 +52,7 @@ public class GhostAI : MonoBehaviour
     }
     
     IEnumerator UpdatePath(){
-        while(!GameController.Instance.b_EndGame)
+        while(!GameController.Instance.gameCompleted)
         {
             yield return new WaitForSeconds(0.2f);
             if (auto)
@@ -73,7 +73,7 @@ public class GhostAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        while(GameController.Instance.b_EndGame)
+        while(GameController.Instance.gameCompleted)
         {
             rb.velocity = Vector2.zero;
             return;

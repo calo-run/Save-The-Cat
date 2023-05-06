@@ -23,7 +23,7 @@ public class CatController : ObjectBase, IHit
         }
         SoundManager.Instance.PlaySoundDogLose();
         gameCompleted = true;
-        if (!GameController.Instance.b_EndGame)
+        if (!GameController.Instance.gameCompleted)
         {
             GameController.Instance.Lose();
         }

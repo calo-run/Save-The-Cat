@@ -47,7 +47,7 @@ public class GhostController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameController.Instance.b_EndGame)
+        if (!GameController.Instance.gameCompleted)
         {
             BeeLogic();
         }

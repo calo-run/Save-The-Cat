@@ -51,8 +51,8 @@ public class GameController : MonoBehaviour
     public DrawManager drawManager;
     
     [Header("InGame")]
-    public bool PlayGame;
-    public bool b_EndGame;
+    public bool ghostPlaying;
+    public bool gameCompleted;
     public Image ProcessDraw;
     public List<GameObject> stars = new List<GameObject>();
     float TimeToWin = 10f;
@@ -100,6 +100,7 @@ public class GameController : MonoBehaviour
         btn_retry_game.onClick.AddListener(
             delegate
             {
+                Time.timeScale = 0;
                 StopAllCoroutines();
                 Admob.Instance.ShowInterstitialLose();
             });
@@ -142,7 +143,7 @@ public class GameController : MonoBehaviour
     }
 
     public void PlayGameAfterDraw(){
-        PlayGame = true;
+        ghostPlaying = true;
         GetLevelDesign().UnActiveHint();
         btn_hint.gameObject.SetActive(false);
         CountTimeOut(12);
@@ -190,14 +191,17 @@ public class GameController : MonoBehaviour
                 Destroy(item.gameObject);
             }
         }
-        StartCoroutine(createNewLvl());
+        StartCoroutine(CreateNewLvl());
     }
 
-    IEnumerator createNewLvl()
+    IEnumerator CreateNewLvl()
     {
+        Time.timeScale = 1;
         yield return new WaitForEndOfFrame();
         SoundManager.Instance.StopSoundBee();
         btn_hint.gameObject.SetActive(true);
+        ghostPlaying = false;
+        gameCompleted = false;
         GameObject obj = Resources.Load<GameObject>("Level/"+DataGame.Instance.lvl_current);
         GameObject lvl = Instantiate(obj, gameHolder);
         levelDesign = lvl.GetComponent<LevelDesign>();
@@ -205,12 +209,9 @@ public class GameController : MonoBehaviour
         panel_Game.maxPointLineCanDraw = GetLevelDesign().maxPointLineCanDraw;
         ChangeProcessDraw(1f);
         panel_EndGame.gameObject.SetActive(false);
-        
-        yield return new WaitForSecondsRealtime(0.5f);
-        PlayGame = false;
-        b_EndGame = false;
         time_txt.gameObject.SetActive(false);
         
+        yield return new WaitForSecondsRealtime(0.5f);
         drawManager.OnCanDraw();
         DataGame.Instance.SaveLvlCurrent();
         FirebaseUtils.Instance.Start_Lvl(DataGame.Instance.lvl_current);
@@ -281,7 +282,6 @@ public class GameController : MonoBehaviour
     public void WatchAdsToEarn()
     {
         SoundManager.Instance.PlaySoundButton();
-        Debug.Log("Watch Ads");
         btn_Ads_end.interactable = false;
     }
     void UnactivePanel_WhenPlayGame()
@@ -334,8 +334,8 @@ public class GameController : MonoBehaviour
     }
     void ActiveWin()
     {
-        PlayGame = false;
-        b_EndGame = true;
+        ghostPlaying = false;
+        gameCompleted = true;
         countPlay++;
         SoundManager.Instance.StopSoundBee();
         GetLevelDesign().ActiveWin();
@@ -364,7 +364,7 @@ public class GameController : MonoBehaviour
 
     public void Lose()
     {
-        PlayGame = false;
+        ghostPlaying = false;
         GetLevelDesign().ActiveLose();
         StopAllCoroutines();
         StartCoroutine(WaitShowLose());
@@ -378,8 +378,8 @@ public class GameController : MonoBehaviour
     
     public void ActiveLose()
     {
-        if(!b_EndGame)SoundManager.Instance.PlaySoundLose();
-        b_EndGame = true;
+        if(!gameCompleted)SoundManager.Instance.PlaySoundLose();
+        gameCompleted = true;
         SoundManager.Instance.StopSoundBee();
         panel_EndGame.gameObject.SetActive(true);
         panel_EndGame.ActiveLose();

@@ -27,7 +27,6 @@ public class DrawManager : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                canDraw = true;
                 GameController.Instance.GetLevelDesign().UnActiveHint();
                 _CurrentLine = Instantiate(_LinePrefabs, mousePos, Quaternion.identity);
                 _CurrentLine.transform.SetParent(GameController.Instance.GetLevelDesign().transform);
@@ -37,18 +36,9 @@ public class DrawManager : MonoBehaviour
             {
                 _CurrentLine.SetPos(mousePos);
             }
-            if (Input.GetMouseButtonUp(0) && _CurrentLine._Render.positionCount > 1)
+            if (Input.GetMouseButtonUp(0) && _CurrentLine != null && _CurrentLine._Render.positionCount > 1)
             {
-                foreach (Line item in FindObjectsOfType<Line>())
-                {
-                    if (item != null && item._Render.positionCount <= 1)
-                    {
-                        Destroy(item.gameObject);
-                    }
-                }
-                _CurrentLine.EndDraw();
-                DropLine();
-                GameController.Instance.PlayGameAfterDraw();
+                EndDraw();
             }
         }
     }
@@ -58,6 +48,7 @@ public class DrawManager : MonoBehaviour
         canDraw = false;
         _CurrentLine.EndDraw();
         DropLine();
+        GameController.Instance.PlayGameAfterDraw();
     }
 
     public void DropLine()

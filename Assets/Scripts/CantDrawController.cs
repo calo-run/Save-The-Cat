@@ -13,7 +13,7 @@ public class CantDrawController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameController.Instance.PlayGame)
+        if (GameController.Instance.ghostPlaying)
         {
             Destroy(this.gameObject);
         }
