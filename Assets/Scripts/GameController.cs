@@ -100,7 +100,6 @@ public class GameController : MonoBehaviour
         btn_retry_game.onClick.AddListener(
             delegate
             {
-                Time.timeScale = 0;
                 StopAllCoroutines();
                 Admob.Instance.ShowInterstitialLose();
             });
