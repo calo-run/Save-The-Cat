@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "349245387288",
-    "project_id": "save-the-cat-dev",
-    "storage_bucket": "save-the-cat-dev.appspot.com"
+    "project_number": "111896312880",
+    "project_id": "save-the-cat-5f524",
+    "storage_bucket": "save-the-cat-5f524.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:349245387288:android:f366ebcfa1c203eb6ac96d",
+        "mobilesdk_app_id": "1:111896312880:android:0c7eefd4a5deb58c3b01f5",
         "android_client_info": {
-          "package_name": "quantumx.app.savethecat.dev"
+          "package_name": "quantumx.app.savethecat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "349245387288-d3lgmahid399nm0a703n1njlbk99hhu0.apps.googleusercontent.com",
+          "client_id": "111896312880-alqst8htjnltiq8jbnso5ta4jcad4oil.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA4PB_3k0SfXnE8fApcqgZJgpRfyEk-XgY"
+          "current_key": "AIzaSyBgE49q7UxiiSCPxUs1JbfX7vdCExIsvUo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "349245387288-d3lgmahid399nm0a703n1njlbk99hhu0.apps.googleusercontent.com",
+              "client_id": "111896312880-alqst8htjnltiq8jbnso5ta4jcad4oil.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "349245387288-jel5clgmvetvpvokc92hpbcqtb4odbqs.apps.googleusercontent.com",
+              "client_id": "111896312880-fupaanpk61e82j2i7p5dfj7uded9iqcp.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.dreamS.savethecat"
+                "bundle_id": "quantumx.app.savethecat"
               }
             }
           ]
