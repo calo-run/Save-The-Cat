@@ -25,7 +25,6 @@ public class SellectSkinCat : MonoBehaviour
         id = index;
         img.sprite = Resources.Load<Sprite>("SkinIcon/" + id);
         sellect.SetActive(PlayerPrefs.GetInt("SkinSelected", 1) == id);
-        img.color = Color.black;
         txtCost.SetText(cost.ToString());
         btnBuy.gameObject.SetActive(true);
         btnSellect.enabled = false;
@@ -39,7 +38,6 @@ public class SellectSkinCat : MonoBehaviour
     {
         btnBuy.gameObject.SetActive(false);
         btnSellect.enabled = true;
-        img.color = Color.white;
     }
     public void OnClickBuy()
     {

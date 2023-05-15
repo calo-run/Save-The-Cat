@@ -49,9 +49,9 @@ public class LevelItemPrefab : MonoBehaviour
             }
         }
         
-        Debug.LogError("Test mở hết tất cả level");
-        lvl_unlock.SetActive(true);
-        lvl_lock.SetActive(false);
+        //Debug.LogError("Test mở hết tất cả level");
+        //lvl_unlock.SetActive(true);
+        //lvl_lock.SetActive(false);
     }
     void OpenGame()
     {
