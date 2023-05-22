@@ -4393,6 +4393,7 @@ GameObject:
   - component: {fileID: 1172175663}
   - component: {fileID: 1172175664}
   - component: {fileID: 1172175665}
+  - component: {fileID: 1172175666}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -4461,6 +4462,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de9694b95cfc49a40a55a89d8e26cb9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1172175666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172175655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee7eb52ccaf9b544a97f78ed932c630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1179417661
@@ -8477,18 +8490,18 @@ MonoBehaviour:
   panel_EndGame: {fileID: 5555556109314681534}
   gameHolder: {fileID: 367873674}
   drawManager: {fileID: 112229036421907626}
-  PlayGame: 0
-  b_EndGame: 0
+  ghostPlaying: 0
+  gameCompleted: 0
   ProcessDraw: {fileID: 4434917277179237727}
   stars:
   - {fileID: 4756604701977644872}
   - {fileID: 1179417663}
   - {fileID: 947446786}
   time_txt: {fileID: 4434917277098524004}
-  levelDesign: {fileID: 0}
   buyNoAds: {fileID: 0}
   panelNoInternet: {fileID: 907698235}
   particleWin: {fileID: 1241626087}
+  countPlay: 0
 --- !u!224 &1691630409373396864
 RectTransform:
   m_ObjectHideFlags: 0
